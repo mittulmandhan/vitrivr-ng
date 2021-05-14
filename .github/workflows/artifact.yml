@@ -1,4 +1,4 @@
-name: Update assets on release
+name: Add artifact in assets on release
 on:
   release:
     types: [published]
