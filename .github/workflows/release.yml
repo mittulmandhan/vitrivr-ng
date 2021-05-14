@@ -4,7 +4,7 @@ on:
     types: [published]
 jobs:
   dev:
-    name: 
+    name: upload build on release
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
