@@ -23,7 +23,7 @@ jobs:
       #   run: ng test --watch=false --code-coverage --source-map true
       - name: Archive build
         if: success()
-        uses: actions/upload-artifact@v1
+        uses: AButler/upload-release-assets@v2.0
         with:
-          name: vitrivr_build
-          path: dist
+          dir: dist
+          name: 'vitrivr-ng-dist-*'
