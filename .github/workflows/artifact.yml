@@ -1,0 +1,29 @@
+name: Update assets on release
+on:
+  release:
+    types: [published]
+jobs:
+  dev:
+    name: upload build on release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Use node 14.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
+      - name: Install ci
+        run: npm i
+      - name: Install angular
+        run: npm install --global @angular/cli@11
+      - name: build
+        run: ng build --prod
+      # - name: test
+      #   run: ng test --watch=false --code-coverage --source-map true
+      - name: Archive build
+        if: success()
+        uses: actions/upload-artifact@v1
+        with:
+          name: vitrivr_build
+          path: dist
