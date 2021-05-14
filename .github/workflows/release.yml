@@ -13,12 +13,14 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '14.x'
-      - name: Install dependencies
+      - name: Install ci
         run: npm ci
-      - name: 
-        run: npm run ng build --prod --source-map false --base-href /
-      - name: 
-        run: npm run ng test --watch=false --code-coverage --source-map true
+      # - name: Install angular
+      #   run: npm install --global @angular/cli@11
+      - name: build
+        run: ng build --prod --source-map false --base-href /
+      # - name: test
+      #   run: ng test --watch=false --code-coverage --source-map true
       - name: Archive build
         if: success()
         uses: actions/upload-artifact@v1
