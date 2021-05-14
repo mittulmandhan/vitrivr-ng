@@ -1,0 +1,27 @@
+name: Update assets on release
+on:
+  release:
+    types: [published]
+jobs:
+  dev:
+    name: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Use node 14.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
+      - name: Install dependencies
+        run: npm ci
+      - name: 
+        run: npm run ng build --prod --source-map false --base-href /vitrivr-ng/
+      - name: 
+        run: npm run ng test --watch=false --code-coverage --source-map true
+      - name: Archive build
+        if: success()
+        uses: actions/upload-artifact@v1
+        with:
+          name: vitrivr_build
+          path: dist
